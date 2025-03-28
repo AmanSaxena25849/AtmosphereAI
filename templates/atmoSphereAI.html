@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Weather</title>
+    <link rel="stylesheet" href="{% static "atmoSphereAI.css" %}">
+    <script src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js"></script>
+    
+    
+</head>
+<body>
+    <header>
+        <div class="location-container">
+            <h1 class="app-title">AtomSphearAI</h1>
+            <div class="location">{{address}}</div>
+            <div class="datetime">{{day_name.0}}, {{today_date}} • {{current_time}}</div>
+        </div>
+        
+        {% comment %} search box. {% endcomment %}
+
+        <div class="search-container">
+            <input
+                type="text"
+                id="search-box"
+                class="search-input"
+                name="search_query"
+                hx-get="{% url 'search_results' %}"
+                hx-trigger="keyup changed delay:300ms[search-box.value.length >= 5] or keyup[key=='Enter']"
+                hx-target=".search-suggestions"
+                hx-swap="innerHTML"
+                placeholder="Search for location..."
+                autocomplete="off"
+            />
+            
+            <div class="search-suggestions">
+                <a href="{% url 'weather' %}?lat=40.730610&lon=-73.935242" class="suggestion-item">
+                    <div class="suggestion-icon">🗼</div>
+                    <div class="suggestion-content">
+                        <div class="suggestion-title">New York</div>
+                        <div class="suggestion-subtitle">
+                            New York, United States
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'weather' %}?lat=30.001667&lon=-90.092781" class="suggestion-item">
+                    <div class="suggestion-icon">🗼</div>
+                    <div class="suggestion-content">
+                        <div class="suggestion-title">New Orleans</div>
+                        <div class="suggestion-subtitle">
+                            Louisiana, United States
+                        </div>
+                    </div>
+                </a>
+                <a href="{% url 'weather' %}?lat=28.7041&lon=77.1025" class="suggestion-item">
+                    <div class="suggestion-icon">🗼</div>
+                    <div class="suggestion-content">
+                        <div class="suggestion-title">New Delhi</div>
+                        <div class="suggestion-subtitle">Delhi, India</div>
+                    </div>
+                </a>
+                <a href="{% url 'weather' %}?lat=54.966667&lon=-1.600000" class="suggestion-item">
+                    <div class="suggestion-icon">🗼</div>
+                    <div class="suggestion-content">
+                        <div class="suggestion-title">Newcastle</div>
+                        <div class="suggestion-subtitle">
+                            England, United Kingdom
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+
+    <div class="main-content">
+        <div class="weather-container">
+            <section class="current-weather">
+                <div class="primary-info">
+                    <div class="current-temp">{{current_temp}}°C</div>
+                    <div class="weather-condition">{{hour_weather.0}}</div>
+                    <div class="temp-range">
+                        <span>↑ {{max_temp}}°C</span>
+                        <span>↓ {{min_temp}}°C</span>
+                    </div>
+                </div>
+                
+                <div class="weather-details">
+                    <div class="weather-detail">
+                        <div class="detail-label">Wind</div>
+                        <div class="detail-value">{{wind_speed}} km/h</div>
+                    </div>
+                    <div class="weather-detail">
+                        <div class="detail-label">Humidity</div>
+                        <div class="detail-value">{{relative_humidity}}%</div>
+                    </div>
+                    <div class="weather-detail">
+                        <div class="detail-label">precipitation</div>
+                        <div class="detail-value">{{precipitation}} mm</div>
+                    </div>
+                    <div class="weather-detail">
+                        <div class="detail-label">Pressure</div>
+                        <div class="detail-value">{{surface_pressure}} hPa</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="hourly-forecast">
+                <h2 class="section-title">Hourly Forecast</h2>
+                <div class="forecast-scroll">
+                    <div class="forecast-container">
+                       {% for hour, hour_temp, hour_weather, hour_weather_icon in hour_data %}
+                            <div class="forecast-item">
+                                <div class="forecast-time">{{hour}}</div>
+                                <div class="icon"><img src="{{hour_weather_icon}}" alt=""></div>
+                                <div class="forecast-temp">{{hour_temp}}°</div>
+                                <div class="forecast-condition">{{hour_weather}}</div>
+                            </div>  
+                       {% endfor %}
+                    </div>
+                </div>
+            </section>
+            
+            <section class="daily-forecast">
+                <h2 class="section-title daily">8-Day Forecast</h2>
+                <div class="daily-items-container">
+                    {% for day_name, day_temperature, day_weather, day_weather_icon in day_data %}
+                        <div class="daily-item">
+                            <img class="small-icon" src="{{day_weather_icon}}" alt="">
+                            {% if forloop.first %}
+                                <div class="day-name">Today</div>
+                            {% elif forloop.counter == 2 %}
+                                <div class="day-name">Tomorrow</div>
+                            {% else %}
+                                <div class="day-name">{{day_name}}</div>
+                            {% endif %}
+                            
+                            <div class="day-condition">
+                                {{day_weather}}
+                            </div>
+                            <div class="day-temp">{{day_temperature}}°</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+        
+        {% comment %} html for chatbot. {% endcomment %}
+
+        <div class="chatbot-container">
+            <div class="chatbot-header">
+                <div class="bot-avatar">AI</div>
+                <div class="chatbot-title">AtomSphearAI</div>
+            </div>
+            
+            <div class="chatbot-messages">
+                <div class="message bot-message">
+                    Hi there! Good morning.
+                </div>
+                
+            </div>
+            
+            <form 
+                hx-post="{% url 'chat_results' %}" 
+                hx-target=".chatbot-messages"
+                hx-trigger="submit"
+                hx-swap="beforeend"
+                class="chatbot-input">
+
+                {% csrf_token %}
+
+                <input type="hidden" name="weather_data" value="{{ weather_data }}">
+                <input  type="text" name="user_chat" class="message-input" placeholder="Ask about the weather..." autocomplete="off">
+
+                <button type="submit" class="send-button">➤</button>
+
+            <form>
+        </div>
+    </div>
+
+    {% comment %} only home view sends latitude and longitude data so this script is exicuted. allows us to use one html file for multiple pages. {% endcomment %}
+
+    {% if latitude and longitude %}
+        <script>
+            const initialLatitude = {{ latitude }}
+            const initialLongitude = {{ longitude }}
+
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        async (position) => {
+                            try {
+                                if(initialLatitude != (position.coords.latitude) && initialLongitude != (position.coords.longitude)){
+
+                                    window.location.href = `{% url "weather" %}?lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
+
+                                }
+                            } catch (error) {
+                                console.error("Error redirecting:", error);
+                            }
+                        },
+                        (error) => {
+                            console.error("Error getting location:", error.message);
+                        }
+                    );
+                } else {
+                    console.log("Geolocation is not supported by this browser.");
+                }
+            }
+                        
+            window.onload = getLocation;
+        </script>
+    {% endif %}
+    <script src="{% static "atmoSphereAI.js" %}"></script>
+      
+</body>
+</html>
