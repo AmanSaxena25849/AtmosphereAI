@@ -1,0 +1,34 @@
+
+{% comment %} search list to be sent by htmx. {% endcomment %}
+
+{% if city_data %}
+    {% for city in city_data %}
+        <a href="{% url 'weather' %}?lat={{ city.2 }}&lon={{ city.3 }}" class="suggestion-item">
+            <div class="suggestion-icon">🗼</div>
+            <div class="suggestion-content">
+                <div class="suggestion-title">{{ city.0}}</div>
+                <div class="suggestion-subtitle">{{ city.1 }}</div>
+            </div>
+        </a>
+    {% endfor %}
+{% else %}
+    <div class="suggestion-item">
+        <div class="suggestion-content">
+            <div class="suggestion-title">No city found.</div>
+        </div>
+    </div>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
