@@ -1,0 +1,13 @@
+{% if reply %}
+    <div class="message user-message">
+        {{user_chat}}
+    </div>
+    <div class="message bot-message">
+        {{reply}}
+    </div>
+{% else %}
+    <div class="message-warning">
+        To many request! We allow only {{limit}} request per user every minute. 
+        please try after {{remaining_time}} seconds.
+    </div>
+{% endif %}
