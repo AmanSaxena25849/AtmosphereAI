@@ -17,3 +17,60 @@ button.addEventListener('click', () => {
     input.style.opacity = '1';
   }, 10);
 });
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const aboutButton = document.querySelector('.about-button');
+  const aboutContainer = document.querySelector('.about-container');
+  const closeAbout = document.querySelector('.close-about');
+  
+  // Initially hide the about section
+  aboutContainer.style.display = 'none';
+  
+  aboutButton.addEventListener('click', function() {
+      aboutContainer.style.display = 'block';
+  });
+  
+  closeAbout.addEventListener('click', function() {
+      aboutContainer.style.display = 'none';
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const aboutButton = document.querySelector('.about-button');
+  const aboutContainer = document.querySelector('.about-container');
+  const closeAbout = document.querySelector('.close-about');
+  
+  // Initially hide the about section
+  aboutContainer.style.display = 'none';
+  
+  aboutButton.addEventListener('click', function() {
+      // First make the about container visible
+      aboutContainer.style.display = 'block';
+      
+      // Wait a moment for the display change to take effect
+      setTimeout(() => {
+          // Then scroll to the about section smoothly
+          aboutContainer.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+          });
+      }, 100);
+  });
+  
+  closeAbout.addEventListener('click', function() {
+      // Scroll back to top before hiding
+      window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+      });
+      
+      // After scrolling up, hide the about section
+      setTimeout(() => {
+          aboutContainer.style.display = 'none';
+      }, 500);
+  });
+});
