@@ -407,7 +407,7 @@ def get_weather(latitude: float, longitude: float)->dict:
                                 "day_data":day_data}
                 
                 #set cache in redis for 15min.....
-                cache.set(cache_key, weather_data , timeout=900)
+                cache.set(cache_key, weather_data , timeout=300)
                 print("Data set in redis cache")
                 
                 
