@@ -18,7 +18,6 @@
             <div class="datetime">{{day_name.0}}, {{today_date}} • {{current_time}}</div>
         </div>
         
-        {% comment %} search box. {% endcomment %}
 
         <div class="search-container">
             <input
@@ -71,111 +70,194 @@
                 </a>
             </div>
         </div>
+
+        <button class="about-button">
+            <img src="https://img.icons8.com/fluency/42/info.png" alt="info"/>
+            <p class="about-hover">About US</p>
+        </button>
     </header>
     
 
     <div class="main-content">
-        <div class="weather-container">
-            <section class="current-weather">
-                <div class="primary-info">
-                    <div class="current-temp">{{current_temp}}°C</div>
-                    <div class="weather-condition">{{hour_weather.0}}</div>
-                    <div class="temp-range">
-                        <span>↑ {{max_temp}}°C</span>
-                        <span>↓ {{min_temp}}°C</span>
-                    </div>
-                </div>
-                
-                <div class="weather-details">
-                    <div class="weather-detail">
-                        <div class="detail-label">Wind</div>
-                        <div class="detail-value">{{wind_speed}} km/h</div>
-                    </div>
-                    <div class="weather-detail">
-                        <div class="detail-label">Humidity</div>
-                        <div class="detail-value">{{relative_humidity}}%</div>
-                    </div>
-                    <div class="weather-detail">
-                        <div class="detail-label">precipitation</div>
-                        <div class="detail-value">{{precipitation}} mm</div>
-                    </div>
-                    <div class="weather-detail">
-                        <div class="detail-label">Pressure</div>
-                        <div class="detail-value">{{surface_pressure}} hPa</div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="hourly-forecast">
-                <h2 class="section-title">Hourly Forecast</h2>
-                <div class="forecast-scroll">
-                    <div class="forecast-container">
-                       {% for hour, hour_temp, hour_weather, hour_weather_icon in hour_data %}
-                            <div class="forecast-item">
-                                <div class="forecast-time">{{hour}}</div>
-                                <div class="icon"><img src="{{hour_weather_icon}}" alt=""></div>
-                                <div class="forecast-temp">{{hour_temp}}°</div>
-                                <div class="forecast-condition">{{hour_weather}}</div>
-                            </div>  
-                       {% endfor %}
-                    </div>
-                </div>
-            </section>
-            
-            <section class="daily-forecast">
-                <h2 class="section-title daily">8-Day Forecast</h2>
-                <div class="daily-items-container">
-                    {% for day_name, day_temperature, day_weather, day_weather_icon in day_data %}
-                        <div class="daily-item">
-                            <img class="small-icon" src="{{day_weather_icon}}" alt="">
-                            {% if forloop.first %}
-                                <div class="day-name">Today</div>
-                            {% elif forloop.counter == 2 %}
-                                <div class="day-name">Tomorrow</div>
-                            {% else %}
-                                <div class="day-name">{{day_name}}</div>
-                            {% endif %}
-                            
-                            <div class="day-condition">
-                                {{day_weather}}
-                            </div>
-                            <div class="day-temp">{{day_temperature}}°</div>
+        <div class="weather-chatbot-container">
+            <div class="weather-container">
+                <section class="current-weather">
+                    <div class="primary-info">
+                        <div class="current-temp">{{current_temp}}°C</div>
+                        <div class="weather-condition">{{hour_weather.0}}</div>
+                        <div class="temp-range">
+                            <span>↑ {{max_temp}}°C</span>
+                            <span>↓ {{min_temp}}°C</span>
                         </div>
-                    {% endfor %}
-                </div>
-            </section>
-        </div>
-        
-        {% comment %} html for chatbot. {% endcomment %}
+                    </div>
+                    
+                    <div class="weather-details">
+                        <div class="weather-detail">
+                            <div class="detail-label wind">Wind</div>
+                            <div class="detail-value">{{wind_speed}} km/h</div>
+                        </div>
+                        <div class="weather-detail">
+                            <div class="detail-label humidity">Humidity</div>
+                            <div class="detail-value">{{relative_humidity}}%</div>
+                        </div>
+                        <div class="weather-detail">
+                            <div class="detail-label precipitation">Precipitation</div>
+                            <div class="detail-value">{{precipitation}} mm</div>
+                        </div>
+                        <div class="weather-detail">
+                            <div class="detail-label Pressure">Pressure</div>
+                            <div class="detail-value">{{surface_pressure}} hPa</div>
+                        </div>
+                    </div>
+                </section>
 
-        <div class="chatbot-container">
-            <div class="chatbot-header">
-                <div class="bot-avatar">AI</div>
-                <div class="chatbot-title">AtomSphearAI</div>
+                <section class="hourly-forecast">
+                    <h2 class="section-title">Hourly Forecast</h2>
+                    <div class="forecast-scroll">
+                        <div class="forecast-container">
+                        {% for hour, hour_temp, hour_weather, hour_weather_icon in hour_data %}
+                                <div class="forecast-item">
+                                    <div class="forecast-time">{{hour}}</div>
+                                    <div class="icon"><img src="{{hour_weather_icon}}" alt=""></div>
+                                    <div class="forecast-temp">{{hour_temp}}°</div>
+                                    <div class="forecast-condition">{{hour_weather}}</div>
+                                </div>  
+                        {% endfor %}
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="daily-forecast">
+                    <h2 class="section-title daily">8-Day Forecast</h2>
+                    <div class="daily-items-container">
+                        {% for day_name, day_temperature, day_weather, day_weather_icon in day_data %}
+                            <div class="daily-item">
+                                <img class="small-icon" src="{{day_weather_icon}}" alt="">
+                                {% if forloop.first %}
+                                    <div class="day-name">Today</div>
+                                {% elif forloop.counter == 2 %}
+                                    <div class="day-name">Tomorrow</div>
+                                {% else %}
+                                    <div class="day-name">{{day_name}}</div>
+                                {% endif %}
+                                
+                                <div class="day-condition">
+                                    {{day_weather}}
+                                </div>
+                                <div class="day-temp">{{day_temperature}}°</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
             </div>
-            
-            <div class="chatbot-messages">
-                <div class="message bot-message">
-                    Hi there! Good morning.
+
+            <div class="chatbot-container">
+                <div class="chatbot-header">
+                    <div class="bot-avatar"><img src="{% static "AI.png" %}" alt="bot"/></div>
+                    <div class="chatbot-title">AtomSphearAI</div>
                 </div>
                 
+                <div class="chatbot-messages">
+                    <div class="message bot-message">
+                        Hi there! Good morning.
+                    </div>
+                    
+                </div>
+                
+                <form 
+                    hx-post="{% url 'chat_results' %}" 
+                    hx-target=".chatbot-messages"
+                    hx-trigger="submit"
+                    hx-swap="beforeend"
+                    class="chatbot-input">
+
+                    {% csrf_token %}
+
+                    <input type="hidden" name="weather_data" value="{{ weather_data }}">
+                    <input  type="text" name="user_chat" class="message-input" placeholder="Ask about the weather..." autocomplete="off">
+
+                    <button type="submit" class="send-button">➤</button>
+
+                <form>
+            </div>
+        </div>
+
+        <div class="about-container">
+            <div class="about-header">
+                <h2 class="section-title about">About Us</h2>
+                <button class="close-about"><img src="https://img.icons8.com/ffffff/ios-filled/24/delete-sign--v1.png" alt="delete-sign--v1"/></button>
             </div>
             
-            <form 
-                hx-post="{% url 'chat_results' %}" 
-                hx-target=".chatbot-messages"
-                hx-trigger="submit"
-                hx-swap="beforeend"
-                class="chatbot-input">
+            <div class="about-content">
+                <div class="creator-profile">
+                    <div class="creator-photo">
+                        <div class="photo-placeholder"><img src="{% static "profile_pic.jpg" %}" alt=""></div>
+                    </div>
+                    <div class="creator-info">
+                        <h3 class="creator-name">Aman Saxena</h3>
+                        <p class="creator-title">Backend Developer</p>
+                    </div>
+                </div>
+                
+                <div class="about-section">
+                    <h3 class="about-subtitle">Technologies</h3>
+                    <div class="tech-container">
+                        <a class="tech-anchor" href="https://open-meteo.com/" target="_blank"> 
+                            <div class="tech-item">
+                                <div class="tech-icon"><img src="https://img.icons8.com/fluency/40/night-wind-.png" alt="night-wind-"/></div>
+                                <div class="tech-details">
+                                    <div class="tech-name"><h4>Open-Meteo.com</h4></div>
+                                    <div class="tech-desc"><p>Real-time weather data and forecasts</p></div>
+                                </div>
+                            </div>
+                        </a>
 
-                {% csrf_token %}
+                        <a class="tech-anchor" href="https://groq.com/" target="_blank"> 
+                            <div class="tech-item">
+                                <div class="tech-icon"><img src="https://img.icons8.com/ultraviolet/40/artificial-intelligence-productivity.png" alt="artificial-intelligence-productivity"/></div>
+                                <div class="tech-details">
+                                    <div class="tech-name"><h4>Groq Llama-3.1</h4></div>
+                                    <div class="tech-desc"><p>Natural language processing for weather insights</p></div>
+                                </div>
+                            </div>
+                        </a>
 
-                <input type="hidden" name="weather_data" value="{{ weather_data }}">
-                <input  type="text" name="user_chat" class="message-input" placeholder="Ask about the weather..." autocomplete="off">
+                        <a class="tech-anchor" href="https://github.com/geopy/geopy/blob/f495974c32a7a7b1eb433e7b8c87166e96375c32/docs/index.rst" target="_blank"> 
+                            <div class="tech-item">
+                                <div class="tech-icon"><img src="https://img.icons8.com/fluency/40/map-marker--v1.png" alt="map-marker--v1"/></div>
+                                <div class="tech-details">
+                                    <div class="tech-name">GeoPy</div>
+                                    <div class="tech-desc">Location services and geocoding</div>
+                                </div>
+                            </div>
+                        </a>
 
-                <button type="submit" class="send-button">➤</button>
+                        <a class="tech-anchor" href="https://icons8.com/" target="_blank"> 
+                            <div class="tech-item">
+                                <div class="tech-icon"><img src="https://img.icons8.com/nolan/40/icons8-new-logo.png" alt="icons8-new-logo"/></div>
+                                <div class="tech-details">
+                                    <div class="tech-name">Icons-8</div>
+                                    <div class="tech-desc">Icons by Icons8</div>
+                                </div>
+                            </div>
+                        </a>
 
-            <form>
+                    </div>
+                </div>
+                
+                <div class="about-section">
+                    <h3 class="about-subtitle">Our Mission</h3>
+                    <p class="mission-text">
+                        AtmoSphearAI was created to make weather information more accessible and actionable. 
+                        We combine beautiful design with smart AI to help you understand the weather and plan your day with confidence.
+                    </p>
+                </div>
+                
+                <div class="about-footer">
+                    <div class="copyright">© 2025 AtmoSphearAI. All rights reserved.</div>
+                    <div class="version">Version 2.3.5</div>
+                </div>
+            </div>
         </div>
     </div>
 
