@@ -18,6 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 UPSTASH_PASSWORD=os.getenv('UPSTASH_PASSWORD')
 DJANGO_SECRET_KEY=os.getenv('DJANGO_SECRET_KEY')
+DJANGO_ALLOWED_HOSTS=os.getenv('DJANGO_ALLOWED_HOSTS')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -26,9 +27,9 @@ DJANGO_SECRET_KEY=os.getenv('DJANGO_SECRET_KEY')
 SECRET_KEY = DJANGO_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = DJANGO_ALLOWED_HOSTS
 
 
 # Application definition
