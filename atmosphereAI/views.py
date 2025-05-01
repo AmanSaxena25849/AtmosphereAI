@@ -24,7 +24,8 @@ def home(request):
 
         return render(request, "atmoSphereAI.html", {**weather_data, "address": address, "latitude":latitude,  "longitude":longitude})
     except:
-        return JsonResponse({'error': "failed to get weather data"}, status=400)
+        print("error: failed to get weather data")
+        return render(request, "page_error.html")
     
 
  

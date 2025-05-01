@@ -105,7 +105,21 @@ header {
     background: rgba(255, 255, 255, 0.15);
 }
 
-/* Add these styles to your CSS file */
+.page-error-center{
+    margin: auto;
+    font-size: 2rem;
+    color: var(--accent-color);
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    position: relative;
+    overflow: visible;
+}
 
 .search-container {
     position: relative;

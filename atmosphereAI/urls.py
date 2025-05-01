@@ -23,5 +23,5 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("weather/", views.city_weather, name="weather"),
     path("search_results/", views.search_results, name="search_results"),
-    path("chat_results/", views.chatbot, name="chat_results")
+    path("chat_results/", views.chatbot, name="chat_results"),
 ]
