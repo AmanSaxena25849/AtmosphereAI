@@ -1,4 +1,8 @@
 <img src="logo/AtmosphereAI.png">
+<p float="left">
+  <img src="logo/AtmosphereAI2.png" width="75%" height="350px"/>
+  <img src="logo/AtmosphereAI3.png" width="24.4%" height="350px"/>
+</p>
 
 # AtmosphereAI
 
@@ -121,8 +125,13 @@ AtmosphereAI/
 
 ## Contact
 
-Aman Saxena: aman25849@gmial.com
+**Aman saxena**
+Email: amansaxena25849@gmail.com
+Linkedin: https://www.linkedin.com/in/aman-saxena-949bb9322/
+Live Demo: https://atmosphereai.onrender.com/
 Project Link: [https://github.com/AmanSaxena25849/AtmosphereAI](https://github.com/AmanSaxena25849/AtmosphereAI)
+
+
 
 ## Acknowledgments
 
