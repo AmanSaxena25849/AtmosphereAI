@@ -126,11 +126,11 @@ AtmosphereAI/
 ## Contact
 
 **Aman saxena**
-Email: amansaxena25849@gmail.com
-Linkedin: https://www.linkedin.com/in/aman-saxena-949bb9322/
-Live Demo(vercel): https://atmosphere-ai.vercel.app/
-Live Demo(render): https://atmosphereai.onrender.com/
-Project Link: [https://github.com/AmanSaxena25849/AtmosphereAI](https://github.com/AmanSaxena25849/AtmosphereAI)
+- Email: amansaxena25849@gmail.com
+- Linkedin: https://www.linkedin.com/in/aman-saxena-949bb9322/
+- Live Demo(vercel): https://atmosphere-ai.vercel.app/
+- Live Demo(render): https://atmosphereai.onrender.com/
+- Project Link: [https://github.com/AmanSaxena25849/AtmosphereAI](https://github.com/AmanSaxena25849/AtmosphereAI)
 
 
 
