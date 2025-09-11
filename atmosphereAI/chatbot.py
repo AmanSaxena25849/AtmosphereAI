@@ -32,7 +32,7 @@ def chat_reply(question:str, helping_data:str = '') -> str:
                     "content": question,#user question.
                 }
             ],
-            model="llama3-70b-8192",#model name(change model by changing name all names listed here: https://console.groq.com/docs/rate-limits)
+            model="llama-3.1-8b-instant",#model name(change model by changing name all names listed here: https://console.groq.com/docs/rate-limits)
             
             #warning: make sure model allows large numbers of calls such as llama models.
         )
