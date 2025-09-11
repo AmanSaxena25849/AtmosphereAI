@@ -90,7 +90,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "rediss://modern-stork-20215.upstash.io:6379",
+        "LOCATION": "rediss://fair-llama-41881.upstash.io:6379",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "PASSWORD": UPSTASH_PASSWORD,
