@@ -96,9 +96,10 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": UPSTASH_LOCATION,
+        "LOCATION": UPSTASH_LOCATION,  # host only
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "USERNAME": "default",
             "PASSWORD": UPSTASH_PASSWORD,
             "SSL": True,
         }
