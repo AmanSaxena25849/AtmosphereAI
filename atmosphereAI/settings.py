@@ -16,9 +16,11 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
+UPSTASH_LOCATION = os.getenv('UPSTASH_LOCATION')
 UPSTASH_PASSWORD=os.getenv('UPSTASH_PASSWORD')
 DJANGO_SECRET_KEY=os.getenv('DJANGO_SECRET_KEY')
 DJANGO_ALLOWED_HOSTS=os.getenv('DJANGO_ALLOWED_HOSTS')
+DEBUG_STATE=os.getenv('DEBUG_STATE', False)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -27,9 +29,8 @@ DJANGO_ALLOWED_HOSTS=os.getenv('DJANGO_ALLOWED_HOSTS')
 SECRET_KEY = DJANGO_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['.vercel.app']
+DEBUG = DEBUG_STATE
+ALLOWED_HOSTS = [DJANGO_ALLOWED_HOSTS] if DJANGO_ALLOWED_HOSTS else []
 
 
 # Application definition
@@ -91,7 +92,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "rediss://fair-llama-41881.upstash.io:6379",
+        "LOCATION": UPSTASH_LOCATION,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "PASSWORD": UPSTASH_PASSWORD,

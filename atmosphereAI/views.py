@@ -21,6 +21,8 @@ def home(request):
     try:    
         weather_data = get_weather(latitude=latitude, longitude=longitude)  #gets weather data 
         address = get_location(latitude=latitude, longitude=longitude) #gets address of that coordinates
+        print(weather_data)
+        print(address)
 
         return render(request, "atmoSphereAI.html", {**weather_data, "address": address, "latitude":latitude,  "longitude":longitude})
     except:
